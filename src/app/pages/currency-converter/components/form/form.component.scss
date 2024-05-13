@@ -1,0 +1,25 @@
+h2 {
+   text-align: center;
+}
+
+.form-container {
+   width: 100%;
+   display: flex;
+   justify-content: center;
+   margin: 0 auto;
+}
+
+.form-content-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 24px;
+    gap: 16px;
+    background-color: #faf6f6;
+}
+
+.form-select {
+   display: flex;
+   align-items: center;
+   gap: 50px;
+}

@@ -6,7 +6,13 @@ html, body {
 
 body { 
     margin: 0; 
-    font-family: Roboto, 
-    "Helvetica Neue", 
-    sans-serif; 
+    font-family: Roboto, "Helvetica Neue", sans-serif; 
+}
+
+.main {
+    margin: 16px  24px 0;
+}
+
+.main-content {
+    width: 100%;
 }
