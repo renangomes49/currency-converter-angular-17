@@ -48,6 +48,17 @@
             <td mat-cell *matCellDef="let row"> {{row.rate}} </td>
         </ng-container>
 
+        <!-- Acões Column -->
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef> Ações </th>
+            <td mat-cell *matCellDef="let row">
+                <button mat-mini-fab color="warn" matTooltip="Excluir o item" 
+                (click)="onDelete(row)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+        </ng-container>
+
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 

@@ -1,9 +1,12 @@
-import { AfterViewInit, Component, ViewChild} from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, ViewChild, output} from '@angular/core';
 import { MatInputModule } from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatTableDataSource, MatTableModule} from '@angular/material/table';
-import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
-import {MatSort, MatSortModule} from '@angular/material/sort';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatSort, MatSortModule} from '@angular/material/sort';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatButtonModule } from '@angular/material/button';
 import { Converter } from '../../../../shared/interfaces/converter.model';
 
 @Component({
@@ -15,6 +18,9 @@ import { Converter } from '../../../../shared/interfaces/converter.model';
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
+    MatIconModule,
+    MatTooltipModule,
+    MatButtonModule,
   ],
   templateUrl: './history-table.component.html',
   styleUrl: './history-table.component.scss'
@@ -22,11 +28,22 @@ import { Converter } from '../../../../shared/interfaces/converter.model';
 export class HistoryTableComponent implements AfterViewInit {
 
   listConverter: Converter[];
-  displayedColumns: string[] = ['dateConverter', 'timeConverter', 'value', 'fromCurrency', 'toCurrency', 'amount', 'rate'];
+  displayedColumns: string[] = [
+    'dateConverter', 
+    'timeConverter', 
+    'value', 
+    'fromCurrency', 
+    'toCurrency', 
+    'amount', 
+    'rate', 
+    'actions'
+  ];
   dataSource: MatTableDataSource<Converter>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+
+  delete = output<Converter>();
 
   constructor() {
 
@@ -111,6 +128,10 @@ export class HistoryTableComponent implements AfterViewInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  onDelete(converter: Converter){
+    this.delete.emit(converter);
   }
 
 }
