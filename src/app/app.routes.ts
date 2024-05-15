@@ -8,7 +8,7 @@ export const routes: Routes = [
         path: 'currency-converter', component: CurrencyConverterComponent
     },
     {
-        path: 'currencys', component: CurrencyListComponent
+        path: 'currencies', component: CurrencyListComponent
     },
     {
         path: 'converter-history', component: ConverterHistoryComponent

@@ -16,8 +16,8 @@
             <mat-form-field>
                 <mat-label>Moeda Origem</mat-label>
                 <mat-select formControlName="from">
-                    @for (item of country_code; track $index) {
-                        <mat-option [value]="item.currency">{{item.currency}}</mat-option>
+                    @for (item of currencies; track $index) {
+                        <mat-option [value]="item.code">{{item.description}}</mat-option>
                     }
                 </mat-select>
                 @if (form.controls['from'].hasError('required')) {
@@ -30,8 +30,8 @@
               <mat-form-field>
                 <mat-label>Moeda Destino</mat-label>
                 <mat-select formControlName="to">
-                @for (item of country_code; track $index) {
-                    <mat-option [value]="item.currency">{{item.currency}}</mat-option>
+                @for (item of currencies; track $index) {
+                    <mat-option [value]="item.code">{{item.description}}</mat-option>
                 }      
                 </mat-select>
                 @if (form.controls['from'].hasError('required')) {
