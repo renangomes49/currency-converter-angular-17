@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -6,6 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Converter } from '../../../../shared/interfaces/converter.model';
 
 @Component({
   selector: 'app-form',
@@ -23,9 +24,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class FormComponent {
   
-  exchangeRateTxt = 'Valor da Conversão';
   form!: FormGroup;
   private snackBar = inject(MatSnackBar);
+  convert = output<Converter>();
 
   country_list = {
     "AED" : "AE",
@@ -202,8 +203,16 @@ export class FormComponent {
   
   onSubmit() {
     const {status, value} = this.form;
+    
     if(status === 'VALID'){
-      // TODO
+      const convert: Converter = {
+        fromCurrency: value.from,
+        toCurrency: value.to,
+        amount: value.amount,
+      } as Converter;
+      
+      this.convert.emit(convert);
+
     }else {
       this.showErrorMsg();
     }
