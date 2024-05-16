@@ -55,7 +55,7 @@ export class FormComponent {
       const convert: Converter = {
         fromCurrency: value.from,
         toCurrency: value.to,
-        amount: value.amount,
+        value: value.amount,
       } as Converter;
       
       this.convert.emit(convert);

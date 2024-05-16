@@ -1,4 +1,5 @@
 export interface Converter {
+    id: string;
     dateConverter: string;
     timeConverter: string;
     value: number;

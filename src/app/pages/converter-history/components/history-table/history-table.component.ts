@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ViewChild, output} from '@angular/core';
+import { AfterViewInit, Component, ViewChild, inject, output} from '@angular/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
@@ -8,6 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonModule } from '@angular/material/button';
 import { Converter } from '../../../../shared/interfaces/converter.model';
+import { CurrencyConverterService } from '../../../../shared/services/currency-converter.service';
 
 @Component({
   selector: 'app-history-table',
@@ -27,8 +28,10 @@ import { Converter } from '../../../../shared/interfaces/converter.model';
 })
 export class HistoryTableComponent implements AfterViewInit {
 
-  listConverter: Converter[];
+  currencyConverterService = inject(CurrencyConverterService);
+
   displayedColumns: string[] = [
+    'id',
     'dateConverter', 
     'timeConverter', 
     'value', 
@@ -46,74 +49,8 @@ export class HistoryTableComponent implements AfterViewInit {
   delete = output<Converter>();
 
   constructor() {
-
-    this.listConverter = [
-      {
-        dateConverter: new Date().toLocaleDateString("pt-BR"),
-        timeConverter: new Date().toLocaleTimeString("pt-BR"),
-        value: 100,
-        fromCurrency: 'BRL',
-        toCurrency: 'USD',
-        amount: 20.167793,
-        rate: 0.200678
-      },
-      {
-        dateConverter: new Date().toLocaleDateString("pt-BR"),
-        timeConverter: new Date().toLocaleTimeString("pt-BR"),
-        value: 200,
-        fromCurrency: 'BRL',
-        toCurrency: 'USD',
-        amount: 20.067793,
-        rate: 0.200678
-      },
-      {
-        dateConverter: new Date().toLocaleDateString("pt-BR"),
-        timeConverter: new Date().toLocaleTimeString("pt-BR"),
-        value: 300,
-        fromCurrency: 'BRL',
-        toCurrency: 'USD',
-        amount: 20.067793,
-        rate: 0.200678
-      },
-      {
-        dateConverter: new Date().toLocaleDateString("pt-BR"),
-        timeConverter: new Date().toLocaleTimeString("pt-BR"),
-        value: 400,
-        fromCurrency: 'BRL',
-        toCurrency: 'USD',
-        amount: 20.067793,
-        rate: 0.200678
-      },
-      {
-        dateConverter: new Date().toLocaleDateString("pt-BR"),
-        timeConverter: new Date().toLocaleTimeString("pt-BR"),
-        value: 100,
-        fromCurrency: 'BRL',
-        toCurrency: 'USD',
-        amount: 20.067793,
-        rate: 0.200678
-      },
-      {
-        dateConverter: new Date().toLocaleDateString("pt-BR"),
-        timeConverter: new Date().toLocaleTimeString("pt-BR"),
-        value: 100,
-        fromCurrency: 'BRL',
-        toCurrency: 'USD',
-        amount: 20.067793,
-        rate: 0.200678
-      },
-      {
-        dateConverter: new Date().toLocaleDateString("pt-BR"),
-        timeConverter: new Date().toLocaleTimeString("pt-BR"),
-        value: 700,
-        fromCurrency: 'BRL',
-        toCurrency: 'USD',
-        amount: 20.067793,
-        rate: 0.200678
-      },
-    ]
-
-    this.dataSource = new MatTableDataSource(this.listConverter);
+    const listConverter: Converter[] = this.currencyConverterService.getAllConverter();
+    this.dataSource = new MatTableDataSource(listConverter);
   }
 
   ngAfterViewInit() {
