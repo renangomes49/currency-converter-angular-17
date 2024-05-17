@@ -25,14 +25,14 @@
                 }
             </mat-form-field>
 
-            <mat-icon>currency_exchange</mat-icon>
+            <mat-icon (click)="onChangeOrder()">currency_exchange</mat-icon>
               
             <mat-form-field>
                 <mat-label>Moeda Destino</mat-label>
                 <mat-select formControlName="to">
-                @for (item of currencies; track $index) {
-                    <mat-option [value]="item.code">{{item.description}}</mat-option>
-                }      
+                    @for (item of currencies; track $index) {
+                        <mat-option [value]="item.code">{{item.description}}</mat-option>
+                    }      
                 </mat-select>
                 @if (form.controls['from'].hasError('required')) {
                     <mat-error>Campo Obrigatório.</mat-error>

@@ -65,6 +65,13 @@ export class FormComponent {
     }
   }
 
+  onChangeOrder() {
+    const fromTemp = this.form.value.from;
+    const toTemp = this.form.value.to;
+    const amountTemp = this.form.value.amount;
+    this.form.setValue({to: fromTemp, from: toTemp, amount: amountTemp});
+  }
+
   private showErrorMsg(): void {
     this.snackBar.open('Verifique os erros encontrados.', 'Ok',{
       duration: 5000,
