@@ -23,3 +23,20 @@ h2 {
    align-items: center;
    gap: 50px;
 }
+
+@media(max-width: 650px){
+
+   .form-content-container {
+      width: 100%;
+   }
+
+   .form-select {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+   }
+
+   mat-form-field {
+      width: 100%;
+   }
+}

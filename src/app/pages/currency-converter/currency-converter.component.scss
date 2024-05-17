@@ -1,12 +1,10 @@
 .card-result {
-    width: 100%;
+    max-width: 500px;
     margin: 0 auto 2em;
-    display: flex;
-    justify-content: center;
 }
 
 mat-card {
-    width: 500px;
+    width: 100%;
 }
 
 p {
