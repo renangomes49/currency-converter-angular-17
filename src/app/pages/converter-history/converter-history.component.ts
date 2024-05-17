@@ -14,14 +14,4 @@ import { BackToHomeComponent } from '../../shared/components/back-to-home/back-t
 })
 export class ConverterHistoryComponent {
 
-  confirmationDialogService = inject(ConfirmationDialogService);
-
-  onDelete(converter: Converter) {
-    this.confirmationDialogService
-      .openDialog()
-      .pipe(filter((answer) => answer === true))
-      .subscribe(() => {
-        // TODO
-      })
-  }
 }

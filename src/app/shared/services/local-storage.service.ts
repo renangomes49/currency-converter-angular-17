@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Converter } from '../interfaces/converter.model';
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +36,23 @@ export class LocalStorageService {
       return listConverter;
     }
     return [];
+  }
+
+  removeConverter(id: string): void {
+    const listConverterStorage = localStorage.getItem('list-converter');
+    let listConverter: Converter[] = []; 
+    let indice = 0;
+
+    if(listConverterStorage !== null){
+      listConverter = JSON.parse(listConverterStorage);
+      listConverter.forEach((c) => {
+        if (c.id === id){
+          listConverter.splice(indice, 1);
+        }
+        indice++;
+      })
+      localStorage.setItem('list-converter', JSON.stringify(listConverter));
+    }
   }
 
 }

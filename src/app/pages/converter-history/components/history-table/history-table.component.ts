@@ -9,6 +9,9 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonModule } from '@angular/material/button';
 import { Converter } from '../../../../shared/interfaces/converter.model';
 import { CurrencyConverterService } from '../../../../shared/services/currency-converter.service';
+import { LocalStorageService } from '../../../../shared/services/local-storage.service';
+import { ConfirmationDialogService } from '../../../../shared/services/confirmation-dialog.service';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-history-table',
@@ -28,7 +31,11 @@ import { CurrencyConverterService } from '../../../../shared/services/currency-c
 })
 export class HistoryTableComponent implements AfterViewInit {
 
+  localStorageService = inject(LocalStorageService);
   currencyConverterService = inject(CurrencyConverterService);
+  confirmationDialogService = inject(ConfirmationDialogService);
+
+  listConverter: Converter[] = []
 
   displayedColumns: string[] = [
     'id',
@@ -46,11 +53,9 @@ export class HistoryTableComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  delete = output<Converter>();
-
   constructor() {
-    const listConverter: Converter[] = this.currencyConverterService.getAllConverter();
-    this.dataSource = new MatTableDataSource(listConverter);
+    this.listConverter = this.currencyConverterService.getAllConverter();
+    this.dataSource = new MatTableDataSource(this.listConverter);
   }
 
   ngAfterViewInit() {
@@ -68,7 +73,15 @@ export class HistoryTableComponent implements AfterViewInit {
   }
 
   onDelete(converter: Converter){
-    this.delete.emit(converter);
+    this.confirmationDialogService
+    .openDialog()
+    .pipe(filter((answer) => answer === true))
+    .subscribe(() => {
+      this.localStorageService.removeConverter(converter.id);
+      this.listConverter = this.currencyConverterService.getAllConverter();
+      this.dataSource = new MatTableDataSource(this.listConverter);
+      this.ngAfterViewInit();
+    })  
   }
 
 }
