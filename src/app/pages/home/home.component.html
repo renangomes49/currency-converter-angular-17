@@ -1,1 +1,21 @@
-<p>home works!</p>
+<mat-card>
+    <mat-card-header>
+      <div mat-card-avatar></div>
+      <mat-card-title>Conversão de Moedas</mat-card-title>
+      <mat-card-subtitle>Faça a sua conversão</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image src="../../../assets/exchange-rate.jpg" alt="Imagem de Pessoas Segurando Moedas">
+    <mat-card-content>
+      <p>
+        Para utilizar nossa calculadora de conversão de moedas, basta selecionar a moeda de origem, 
+        a moeda de destino e o valor que você deseja converter.
+      </p>
+      <p>A calculadora converterá o valor informado com base nas taxas de câmbio advinda do site da
+        <a target="_blank" href="https://www.exchangerate-api.com/">ExchangeRate-API.</a>
+    </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button routerLink="/currency-converter" mat-button>Realizar Conversão</button>
+      <button routerLink="/currencies" mat-button>Moedas Suportadas</button>
+    </mat-card-actions>
+</mat-card>
