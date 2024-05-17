@@ -2,3 +2,34 @@ mat-form-field {
     width: 100%;
     max-width: 350px;
 }
+
+.alter-color-row {
+    font-weight: bold;
+}
+
+tr:nth-child(even) {
+    background-color: lightgray;
+}
+
+mat-icon {
+    color: red;
+}
+
+@media(max-width: 1000px) {
+
+    mat-icon {
+        font-size: 40px;
+    }
+    
+    .head-history-table {
+        display: none;
+    }
+
+    td {
+        display: block;
+    }
+
+    td::before {
+        content: attr(data-th) ": ";
+    }
+}
